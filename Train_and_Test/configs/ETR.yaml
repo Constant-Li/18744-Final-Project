@@ -1,0 +1,42 @@
+work_dir: ./work_dir/test/
+phase: test
+save_interval: 1
+random_seed: 123
+eval_interval: 1
+log_interval: 100
+evaluate_tool: sclite
+
+# feeder args
+
+feeder: Video_Feeder
+dataset: ETR
+num_worker: 10
+transfer_label: true
+
+# model args
+
+model: video_network
+model_args:
+  transfer_label: true
+  loss_weights:
+    # all: 1.0
+    turn: 1.0
+    brake: 1.0
+
+load_checkpoints: 
+
+# optim args
+
+batch_size: 8
+test_batch_size: 8
+optimizer_args:
+  base_lr: 0.001
+  learning_ratio: 1
+  nesterov: false
+  optimizer: AdamW
+  start_epoch: 0
+  step:
+  # - 5
+  - 7
+  weight_decay: 0.0001
+num_epoch: 10
